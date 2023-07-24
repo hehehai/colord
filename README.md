@@ -58,7 +58,7 @@ The performance results were generated on a MBP 2019, 2,6 GHz Intel Core i7 by r
 ## Getting Started
 
 ```
-npm i colord
+npm i @dooit/colord
 ```
 
 ```js

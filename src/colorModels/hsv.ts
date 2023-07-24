@@ -1,9 +1,9 @@
 import { InputObject, RgbaColor, HsvaColor } from "../types";
 import { ALPHA_PRECISION } from "../constants";
-import { clamp, clampHue, isPresent, round } from "../helpers";
+import { clamp, isPresent, round } from "../helpers";
 
 export const clampHsva = (hsva: HsvaColor): HsvaColor => ({
-  h: clampHue(hsva.h),
+  h: clamp(hsva.h, 0, 360),
   s: clamp(hsva.s, 0, 100),
   v: clamp(hsva.v, 0, 100),
   a: clamp(hsva.a),

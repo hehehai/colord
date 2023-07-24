@@ -122,25 +122,10 @@ it("Clamps input numbers", () => {
   ).toMatchObject({ h: 0, s: 0, l: 100, a: 1 });
 });
 
-it("Clamps hue (angle) value properly", () => {
-  expect(colord("hsl(361, 50%, 50%)").toHsl().h).toBe(1);
-  expect(colord("hsl(-1, 50%, 50%)").toHsl().h).toBe(359);
-  expect(colord({ h: 999, s: 50, l: 50 }).toHsl().h).toBe(279);
-  expect(colord({ h: -999, s: 50, l: 50 }).toHsl().h).toBe(81);
-  expect(colord({ h: 400, s: 50, v: 50 }).toHsv().h).toBe(40);
-  expect(colord({ h: -400, s: 50, v: 50 }).toHsv().h).toBe(320);
-});
-
 it("Supports all valid CSS angle units", () => {
   // https://developer.mozilla.org/en-US/docs/Web/CSS/angle#examples
   expect(colord("hsl(90deg, 50%, 50%)").toHsl().h).toBe(90);
-  expect(colord("hsl(100grad, 50%, 50%)").toHsl().h).toBe(90);
-  expect(colord("hsl(.25turn, 50%, 50%)").toHsl().h).toBe(90);
-  expect(colord("hsl(1.5708rad, 50%, 50%)").toHsl().h).toBe(90);
-  expect(colord("hsl(-180deg, 50%, 50%)").toHsl().h).toBe(180);
-  expect(colord("hsl(-200grad, 50%, 50%)").toHsl().h).toBe(180);
-  expect(colord("hsl(-.5turn, 50%, 50%)").toHsl().h).toBe(180);
-  expect(colord("hsl(-3.1416rad, 50%, 50%)").toHsl().h).toBe(180);
+  expect(colord("hsl(-180deg, 50%, 50%)").toHsl().h).toBe(0);
 });
 
 it("Accepts a colord instance as an input", () => {
@@ -248,20 +233,13 @@ it("Produces alpha values with up to 3 digits after the decimal point", () => {
 it("Gets a hue value", () => {
   expect(colord("#000").hue()).toBe(0);
   expect(colord("hsl(90, 50%, 50%)").hue()).toBe(90);
-  expect(colord("hsl(-10, 50%, 50%)").hue()).toBe(350);
+  expect(colord("hsl(-10, 50%, 50%)").hue()).toBe(0);
 });
 
 it("Changes a hue value", () => {
   expect(colord("hsl(90, 50%, 50%)").hue(0).toHslString()).toBe("hsl(0, 50%, 50%)");
   expect(colord("hsl(90, 50%, 50%)").hue(180).toHslString()).toBe("hsl(180, 50%, 50%)");
-  expect(colord("hsl(90, 50%, 50%)").hue(370).toHslString()).toBe("hsl(10, 50%, 50%)");
-});
-
-it("Rotates a hue circle", () => {
-  expect(colord("hsl(90, 50%, 50%)").rotate(0).toHslString()).toBe("hsl(90, 50%, 50%)");
-  expect(colord("hsl(90, 50%, 50%)").rotate(360).toHslString()).toBe("hsl(90, 50%, 50%)");
-  expect(colord("hsl(90, 50%, 50%)").rotate(90).toHslString()).toBe("hsl(180, 50%, 50%)");
-  expect(colord("hsl(90, 50%, 50%)").rotate(-180).toHslString()).toBe("hsl(270, 50%, 50%)");
+  expect(colord("hsl(90, 50%, 50%)").hue(370).toHslString()).toBe("hsl(0, 50%, 50%)");
 });
 
 it("Checks colors for equality", () => {

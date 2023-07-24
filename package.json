@@ -1,6 +1,6 @@
 {
-  "name": "colord",
-  "version": "2.9.3",
+  "name": "@dooit/colord",
+  "version": "2.10.3",
   "description": "👑 A tiny yet powerful tool for high-performance color manipulations and conversions",
   "keywords": [
     "color",
@@ -110,7 +110,7 @@
     "test": "jest tests --coverage",
     "benchmark": "tsc --outDir bench --skipLibCheck --esModuleInterop ./tests/benchmark.ts && node ./bench/tests/benchmark.js && rm -rf ./bench",
     "build": "rm -rf ./dist/* && rollup --config",
-    "release": "npm run build && cp *.json dist && cp *.md dist && npm publish dist",
+    "release": "npm run build && cp *.json dist && cp *.md dist && cd dist && npm publish --access=public",
     "check-release": "npm run release -- --dry-run"
   },
   "dependencies": {},
